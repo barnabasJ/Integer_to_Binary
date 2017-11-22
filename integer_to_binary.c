@@ -1,29 +1,42 @@
 #include <stdio.h>
 
+#define BITS 32
+/*
+ * Integers are normally 32 Bits
+ */
+
 int main() {
-  int binary[16] = {0};
-  int printloop;
-  int i = 15;
+  int binary[BITS] = {0};
+  /*
+   * start from 0 and fill the array with the bits
+   */
+  int i = 0;
   int integer = 0;
   int originalnumber = 0;
 
-  printf("This Program shows up to 16 bits of a specified integer Number\n");
+  printf("This Program shows bits of a specified integer Number\n");
   printf("Enter integer number\n");
   scanf("%d", &integer);
 
-  originalnumber = originalnumber + integer;
+  originalnumber = integer;
 
   while (integer > 0) {
-    if (integer % 2 != 0)
-      binary[i] = 1;
-
-    i--;
-    integer = integer / 2;
+    /*
+     * The 0 or 1 can be directly saved into the array
+     */
+    binary[i] = integer % 2;
+    integer /= 2;
+    ++i;
   }
 
   printf("The binary representation of %d is:\n", originalnumber);
-  for (printloop = 0; printloop < 16; printloop++)
-    printf("%d ", binary[printloop]);
+  /*
+   * first decrement i because it's one higher then the last bit we safed into
+   * the array
+   */
+  for (--i; i >= 0; --i) {
+    printf("%d ", binary[i]);
+  }
 
-  return (0);
+  return 0;
 }
